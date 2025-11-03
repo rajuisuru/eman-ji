@@ -1,0 +1,23 @@
+body {
+  background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+#timer {
+  font-size: 1.5em;
+  margin-top: 15px;
+}

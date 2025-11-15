@@ -1,4 +1,11 @@
-/* ---------------- TIMER ---------------- */
+console.log("Songs loaded:", songs);
+
+songs.forEach(src => {
+  fetch(src)
+    .then(r => console.log(src, "status:", r.status))
+    .catch(err => console.log("Error with", src, err));
+});
+
 
 const startDate = new Date("2025-05-22T02:16:00+05:30");
 
@@ -65,3 +72,4 @@ function createHeart() {
 }
 
 setInterval(createHeart, 400);
+

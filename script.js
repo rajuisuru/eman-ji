@@ -1,10 +1,10 @@
-// Set your date here
+/* ---------------- TIMER (your existing code, unchanged) ---------------- */
+
 const startDate = new Date("2025-05-22T02:16:00+05:30");
 
 function updateTimer() {
   const now = new Date();
 
-  // Covert both dates to UTC at midnight
   const utcStart = Date.UTC(
     startDate.getFullYear(),
     startDate.getMonth(),
@@ -20,7 +20,6 @@ function updateTimer() {
   const dayDiff = utcNow - utcStart;
   const days = Math.floor(dayDiff / (1000 * 60 * 60 * 24));
 
-  // Local time ticking
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
@@ -31,3 +30,47 @@ function updateTimer() {
 
 setInterval(updateTimer, 1000);
 updateTimer();
+
+
+
+/* ---------------- MUSIC PLAYER ---------------- */
+
+// Add your song files here (must match your filenames exactly)
+const songs = [
+  "Main Tera.m4a",
+  "creep.m4a",
+  "pehli dafa.m4a"
+];
+
+let currentSongIndex = 0;
+const music = new Audio(songs[currentSongIndex]);
+music.volume = 0.9;
+music.loop = false;
+
+// When one song finishes, stick to the loop
+music.addEventListener("ended", () => {
+  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  music.src = songs[currentSongIndex];
+  music.play();
+});
+
+// Floating button click → play music
+document.getElementById("musicButton").addEventListener("click", () => {
+  music.play();
+  document.getElementById("musicButton").innerText = "💜"; // changes icon after click
+});
+
+
+
+/* ---------------- FLOATING HEARTS (optional, from earlier) ---------------- */
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 400);

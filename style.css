@@ -102,3 +102,36 @@ p {
   }
 }
 
+/* 🎵 Floating Music Button */
+#musicButton {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(255, 105, 180, 0.4);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s ease-in-out;
+  animation: floatButton 3s ease-in-out infinite;
+  z-index: 1000;
+}
+
+#musicButton:hover {
+  transform: scale(1.15) rotate(8deg);
+  background: linear-gradient(135deg, #ff69b4, #ff85c0);
+}
+
+/* Floating button bounce animation */
+@keyframes floatButton {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+

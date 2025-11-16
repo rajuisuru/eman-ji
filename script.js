@@ -73,7 +73,7 @@ function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
   heart.textContent = "💖"; // upright heart emoji
-  heart.style = Math.random() * 100 + "vw";
+  heart.style.left = Math.random() * 100 + "vw";
   heart.style.animationDuration = (3 + Math.random() * 3) + "s";
   document.body.appendChild(heart);
 
@@ -81,6 +81,7 @@ function createHeart() {
 }
 
 setInterval(createHeart, 400);
+
 
 
 

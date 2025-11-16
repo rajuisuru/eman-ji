@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;600&display=swap');
 
 body {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fbc2eb 100%);
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
@@ -12,69 +12,61 @@ body {
   color: #fff;
 }
 
-/* Main Card */
 .container {
   text-align: center;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
   padding: 50px 40px;
   border-radius: 30px;
-  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.5);
+  box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
   animation: fadeIn 2s ease-out;
 }
 
 h1 {
   font-family: 'Sacramento', cursive;
-  font-size: 3.8rem;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
-  margin-bottom: 10px;
+  font-size: 3.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  margin-bottom: 15px;
 }
 
 p {
   font-size: 1.2rem;
+  font-weight: 300;
   color: #ffe6f0;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 #timer {
   font-size: 1.6rem;
   font-weight: 600;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
-  animation: glowText 2s ease-in-out infinite alternate;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* Floating Music Button */
-#musicButton {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, rgba(255, 182, 193, 0.8), rgba(255, 105, 180, 0.8));
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  color: white;
-  box-shadow: 0 10px 20px rgba(255, 105, 180, 0.4);
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: transform 0.2s;
-  animation: floatButton 3s ease-in-out infinite;
-}
-#musicButton:hover {
-  transform: scale(1.15);
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ffb6c1, 0 0 30px #ff69b4;
+  }
+  to {
+    text-shadow: 0 0 20px #ffb6c1, 0 0 40px #ff69b4, 0 0 60px #ff69b4;
+  }
 }
 
-/* Floating Hearts Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating hearts */
 .heart {
   position: fixed;
   width: 20px;
   height: 20px;
   background-color: #ff6699;
   transform: rotate(45deg);
-  animation: floatUp 6s ease-out infinite;
+  animation: floatUp 6s ease-in infinite;
   opacity: 0.8;
   border-radius: 4px;
 }
@@ -89,26 +81,24 @@ p {
   border-radius: 50%;
 }
 
-.heart::before { top: -10px; left: 0; }
-.heart::after { left: 10px; top: 0; }
+.heart::before {
+  top: -10px;
+  left: 0;
+}
 
-/* Animations */
+.heart::after {
+  left: 10px;
+  top: 0;
+}
+
 @keyframes floatUp {
-  0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-  100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(45deg);
+    opacity: 0;
+  }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes glowText {
-  from { text-shadow: 0 0 8px #ff9a9e, 0 0 18px #ff9a9e; }
-  to { text-shadow: 0 0 12px #ffd1dc, 0 0 30px #ff6699; }
-}
-
-@keyframes floatButton {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}

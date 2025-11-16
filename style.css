@@ -66,27 +66,9 @@ p {
   animation: floatUp 6s ease-in infinite;
   opacity: 0.9;
   z-index: 0;
+  pointer-events: none; /* so they don't block clicks */
 }
 
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #ff6699;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -10px;
-  left: 0;
-}
-
-.heart::after {
-  left: 10px;
-  top: 0;
-}
 
 @keyframes floatUp {
   0% {
@@ -131,6 +113,7 @@ p {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+
 
 
 

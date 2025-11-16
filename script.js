@@ -1,17 +1,9 @@
-console.log("Songs loaded:", songs);
-
-songs.forEach(src => {
-  fetch(src)
-    .then(r => console.log(src, "status:", r.status))
-    .catch(err => console.log("Error with", src, err));
-});
-
+/* ---------------- TIMER ---------------- */
 
 const startDate = new Date("2025-05-22T02:16:00+05:30");
 
 function updateTimer() {
   const now = new Date();
-
   const diff = now - startDate;
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -27,32 +19,27 @@ setInterval(updateTimer, 1000);
 updateTimer();
 
 
-/* ---------------- PLAYLIST MUSIC ---------------- */
+/* ---------------- SONG PLAYER ---------------- */
 
-// Add your filenames here
+// Add your song file names here
 const songs = [
   "Main Tera.m4a",
   "creep.m4a",
   "fly me to the moon.m4a",
-  "oo saathi.m4a",
-  "pehli dafa.m4a",
-  "perfect.m4a",
-  "they call this love.m4a",
-  "what do u mean.m4a"
+  "pehli dafa.m4a"
 ];
 
-let currentIndex = 0;
-const music = new Audio(songs[currentIndex]);
+let currentSongIndex = 0;
+const music = new Audio(songs[currentSongIndex]);
 music.volume = 0.9;
-music.loop = false;
 
 music.addEventListener("ended", () => {
-  currentIndex = (currentIndex + 1) % songs.length;
-  music.src = songs[currentIndex];
+  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  music.src = songs[currentSongIndex];
   music.play();
 });
 
-// floating button click
+// play on button click
 document.getElementById("musicButton").addEventListener("click", () => {
   music.play();
   document.getElementById("musicButton").innerText = "💜";
@@ -72,4 +59,3 @@ function createHeart() {
 }
 
 setInterval(createHeart, 400);
-

@@ -65,7 +65,6 @@ p {
   width: 20px;
   height: 20px;
   background-color: #ff6699;
-  transform: rotate(45deg);
   animation: floatUp 6s ease-in infinite;
   opacity: 0.8;
   border-radius: 4px;
@@ -134,4 +133,5 @@ p {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+
 

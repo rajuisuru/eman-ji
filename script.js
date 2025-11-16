@@ -72,11 +72,13 @@ document.getElementById("musicButton").addEventListener("click", () => {
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
+  heart.innerText = "💖";  // upright heart emoji
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  heart.style.animationDuration = 4 + Math.random() * 5 + "s";
   document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
+
+  setTimeout(() => heart.remove(), 9000);
 }
 
-setInterval(createHeart, 400);
+
 

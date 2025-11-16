@@ -39,7 +39,12 @@ updateTimer();
 const songs = [
   "Main Tera.m4a",
   "creep.m4a",
-  "pehli dafa.m4a"
+  "pehli dafa.m4a",
+  "fly me to the moon.m4a",
+  "oo saathi.m4a",
+  "perfect.m4a",
+  "they call this love.m4a",
+  "what do u mean.m4a"
 ];
 
 let currentSongIndex = 0;
@@ -74,3 +79,4 @@ function createHeart() {
 }
 
 setInterval(createHeart, 400);
+

@@ -62,12 +62,10 @@ p {
 /* Floating hearts */
 .heart {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  background-color: #ff6699;
+  font-size: 24px;
   animation: floatUp 6s ease-in infinite;
-  opacity: 0.8;
-  border-radius: 4px;
+  opacity: 0.9;
+  z-index: 0;
 }
 
 .heart::before,
@@ -133,5 +131,6 @@ p {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+
 
 

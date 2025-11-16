@@ -1,10 +1,12 @@
 /* ---------------- TIMER ---------------- */
 
-const startDate = new Date("2025-05-22T02:16:00+05:30");
+const startDate = new Date(Date.UTC(2025, 4, 21, 20, 46, 0));  // 22 May 2025, 2:16 AM IST
 
 function updateTimer() {
   const now = new Date();
   const diff = now - startDate;
+
+  if (diff < 0) return; // safety check
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -17,7 +19,6 @@ function updateTimer() {
 
 setInterval(updateTimer, 1000);
 updateTimer();
-
 
 /* ---------------- SONG PLAYER ---------------- */
 
@@ -59,3 +60,4 @@ function createHeart() {
 }
 
 setInterval(createHeart, 400);
+

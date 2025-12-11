@@ -21,10 +21,48 @@
     <div id="timer"></div>
     <p>of love 💖</p>
   </div>
+  <!-- ===== Virtual Cake Start ===== -->
+<section id="cakeSection" class="cake-section">
+  <div class="cake-wrap">
+
+    <!-- Candle container (candles inserted by JS) -->
+    <div class="candles" id="candles" aria-label="Candles (click or blow to extinguish)"></div>
+
+    <!-- The cake -->
+    <div class="cake" aria-hidden="false">
+      <div class="frost"></div>
+      <!-- slice element injected by JS when needed -->
+    </div>
+
+    <div class="cake-plate"></div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="controls">
+    <button id="enableMicBtn" class="mini-btn" type="button">Enable Blow Detection</button>
+    <button id="cutBtn" class="mini-btn" type="button">Cut Cake 🎂</button>
+  </div>
+
+  <!-- Hidden message shown after candles go out / cut -->
+  <div id="hiddenMessage" class="hidden-message" aria-hidden="true">
+    <h2>Happy Birthday, my love ❤️</h2>
+    <p>
+      I wish I could be there in person…  
+      but for now, this is my way of celebrating with you.  
+      Blow the candles, cut the cake, and let me be part of your night.
+    </p>
+  </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+</section>
+<!-- ===== Virtual Cake End ===== -->
+
   
   <div id="musicButton" title="Play Music">🎵</div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 

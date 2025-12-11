@@ -289,10 +289,20 @@ setInterval(createHeart, 400);
   }
 
   function checkReveal(){
-    if(allOut()){
-      setTimeout(()=> revealAndCelebrate(), 420);
-    }
+  if(allOut()){
+    // glow pulse
+    cakeEl.classList.add("glow-pulse");
+
+    // remove the effect after animation so it can trigger again if needed
+    setTimeout(() => {
+      cakeEl.classList.remove("glow-pulse");
+    }, 1500);
+
+    // then reveal as normal
+    setTimeout(()=> revealAndCelebrate(), 420);
   }
+}
+
 
   /* ---------- Confetti (canvas) ---------- */
   function launchConfetti(canvas, duration = 4000){
@@ -412,4 +422,5 @@ setInterval(createHeart, 400);
     if (!inside) hideCake();
   });
 })();
+
 

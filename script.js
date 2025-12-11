@@ -386,25 +386,33 @@ setInterval(createHeart, 400);
   cakeSection.style.position = cakeSection.style.position || 'relative';
   cakeSection.appendChild(closeBtn);
 
-  function showCake() {
-    cakeSection.classList.add('show');
-    openBtn.setAttribute('aria-expanded', 'true');
-    // small delay to let CSS display:block apply before scrolling
-    setTimeout(()=> cakeSection.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
-    // disable the open button (prevent accidental re-clicks); you can re-enable if you want
-    openBtn.disabled = true;
-    openBtn.style.opacity = '0.8';
-  }
+function showCake() {
+  cakeSection.classList.add('show');
+  document.getElementById('dimLayer').classList.add('show');
 
-  function hideCake() {
-    cakeSection.classList.remove('show');
-    openBtn.setAttribute('aria-expanded', 'false');
-    openBtn.disabled = false;
-    openBtn.style.opacity = '1';
-    // scroll back up to container nicely
-    const container = document.querySelector('.container');
-    if(container) container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  openBtn.setAttribute('aria-expanded', 'true');
+
+  setTimeout(() => {
+    cakeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 60);
+
+  openBtn.disabled = true;
+  openBtn.style.opacity = '0.8';
+}
+
+
+ function hideCake() {
+  cakeSection.classList.remove('show');
+  document.getElementById('dimLayer').classList.remove('show');
+
+  openBtn.setAttribute('aria-expanded', 'false');
+  openBtn.disabled = false;
+  openBtn.style.opacity = '1';
+
+  const container = document.querySelector('.container');
+  if (container) container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 
   openBtn.addEventListener('click', (e) => {
     showCake();
@@ -422,5 +430,6 @@ setInterval(createHeart, 400);
     if (!inside) hideCake();
   });
 })();
+
 
 

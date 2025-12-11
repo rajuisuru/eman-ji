@@ -386,19 +386,50 @@ setInterval(createHeart, 400);
   cakeSection.style.position = cakeSection.style.position || 'relative';
   cakeSection.appendChild(closeBtn);
 
+  /* Put this near the top of the cake reveal code (where candlesContainer, cakeEl, hiddenMessage and confettiCanvas are in scope) */
+
+function resetCakeState(){
+  // hide message
+  hiddenMessage.classList.remove('show');
+
+  // reset slice visual
+  const slice = cakeEl.querySelector('.slice');
+  if(slice){
+    slice.classList.remove('removed','cut-slight');
+  }
+  cakeEl.classList.remove('plate-gap');
+
+  // reset candles (remove .out)
+  const candleEls = candlesContainer.querySelectorAll('.candle');
+  candleEls.forEach(c => {
+    c.classList.remove('out');
+    c.setAttribute('aria-pressed','false');
+    // ensure flame element exists (in case something removed it)
+    if(!c.querySelector('.flame')){
+      c.innerHTML = `<div class="wick"></div><div class="flame" aria-hidden="true"></div>`;
+    }
+  });
+
+  // clear confetti canvas (stop any visible particles)
+  try {
+    const ctx = confettiCanvas.getContext('2d');
+    ctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+  } catch(e){ /* ignore if canvas absent */ }
+}
+
+
 function showCake() {
+  // reset visuals so opening is clean
+  resetCakeState();
+
   cakeSection.classList.add('show');
   document.getElementById('dimLayer').classList.add('show');
-
   openBtn.setAttribute('aria-expanded', 'true');
-
-  setTimeout(() => {
-    cakeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 60);
-
+  setTimeout(() => cakeSection.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
   openBtn.disabled = true;
   openBtn.style.opacity = '0.8';
 }
+
 
 
  function hideCake() {
@@ -430,6 +461,7 @@ function showCake() {
     if (!inside) hideCake();
   });
 })();
+
 
 
 

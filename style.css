@@ -444,6 +444,22 @@ p {
   }
 }
 
+/* ===== Background dim layer ===== */
+#dimLayer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* semi-dark romantic fade */
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+  z-index: 50; /* slightly below cake & confetti */
+}
+
+#dimLayer.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 
 

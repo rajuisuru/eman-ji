@@ -461,6 +461,132 @@ function showCake() {
     if (!inside) hideCake();
   });
 })();
+/* ===== Robust Open/Close Cake Toggle (replace previous toggle) ===== */
+(function () {
+  // run when DOM ready
+  function initOpenCakeToggle() {
+    const openBtn = document.getElementById('openCakeBtn');
+    const cakeSection = document.getElementById('cakeSection');
+    const dimLayer = document.getElementById('dimLayer');
+
+    if (!openBtn) {
+      console.error('Open-cake button (#openCakeBtn) not found.');
+      return;
+    }
+    if (!cakeSection) {
+      console.error('Cake section (#cakeSection) not found.');
+      return;
+    }
+
+    // locate cake-related nodes used by reset function (if not present, still continue)
+    const candlesContainer = document.getElementById('candles');
+    const hiddenMessage = document.getElementById('hiddenMessage');
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const cakeEl = document.querySelector('.cake');
+
+    function resetCakeState(){
+      // hide message
+      if(hiddenMessage) hiddenMessage.classList.remove('show');
+
+      // reset slice visual
+      if(cakeEl){
+        const slice = cakeEl.querySelector('.slice');
+        if(slice){
+          slice.classList.remove('removed','cut-slight');
+        }
+        cakeEl.classList.remove('plate-gap','glow-pulse');
+      }
+
+      // reset candles (remove .out)
+      if(candlesContainer){
+        const candleEls = candlesContainer.querySelectorAll('.candle');
+        candleEls.forEach(c => {
+          c.classList.remove('out');
+          c.setAttribute('aria-pressed','false');
+          if(!c.querySelector('.flame')){
+            c.innerHTML = `<div class="wick"></div><div class="flame" aria-hidden="true"></div>`;
+          }
+        });
+      }
+
+      // clear confetti canvas
+      if(confettiCanvas){
+        try {
+          const ctx = confettiCanvas.getContext('2d');
+          ctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+        } catch(e){}
+      }
+    }
+
+    // open and close handlers
+    function showCake() {
+      resetCakeState();
+      cakeSection.classList.add('show');
+      if(dimLayer) dimLayer.classList.add('show');
+      openBtn.setAttribute('aria-expanded', 'true');
+      // scroll into view after browser paints
+      setTimeout(()=> cakeSection.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
+      openBtn.disabled = true;
+      openBtn.style.opacity = '0.85';
+    }
+
+    function hideCake() {
+      cakeSection.classList.remove('show');
+      if(dimLayer) dimLayer.classList.remove('show');
+      openBtn.setAttribute('aria-expanded', 'false');
+      openBtn.disabled = false;
+      openBtn.style.opacity = '1';
+      const container = document.querySelector('.container');
+      if(container) container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // create close button (if not already present)
+    if(!cakeSection.querySelector('.close-btn')){
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-btn';
+      closeBtn.type = 'button';
+      closeBtn.innerHTML = '✕';
+      closeBtn.title = 'Close';
+      cakeSection.style.position = cakeSection.style.position || 'relative';
+      cakeSection.appendChild(closeBtn);
+      closeBtn.addEventListener('click', hideCake);
+    } else {
+      // ensure existing close button has handler
+      const existing = cakeSection.querySelector('.close-btn');
+      existing.addEventListener('click', hideCake);
+    }
+
+    // toggle on open button click
+    openBtn.addEventListener('click', (e) => {
+      try {
+        showCake();
+      } catch (err) {
+        console.error('Error showing cake:', err);
+        // attempt graceful fallback
+        openBtn.disabled = false;
+        openBtn.style.opacity = '1';
+      }
+    });
+
+    // optional: click outside to close (mobile-friendly)
+    document.addEventListener('click', (e) => {
+      if (!cakeSection.classList.contains('show')) return;
+      const inside = cakeSection.contains(e.target) || openBtn.contains(e.target);
+      if (!inside) hideCake();
+    });
+
+    // expose a small debug method (in case you want to call from console)
+    window._emolette_resetCakeState = resetCakeState;
+    console.log('Open-cake toggle initialized.');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initOpenCakeToggle);
+  } else {
+    initOpenCakeToggle();
+  }
+})();
+
 
 
 
